@@ -1,0 +1,47 @@
+/status:
+  GET:
+    headers:
+      Content-Type: text/html; charset=utf-8
+    body: |
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            font-size: calc(10px + 2vmin);
+            color: #333;
+          }
+        </style>
+      </head>
+      <body>
+        <div>
+          <p>The mock server is up and running!</p>
+        </div>
+      </body>
+      </html>
+    status: 200
+
+/book:
+  GET:
+    headers:
+      Content-Type: application/json; charset=utf-8
+    body: |
+      {
+        "book": "title"
+      }
+    status: 200
+  POST:
+    headers:
+      Key-1: Value-1
+    status: 201
+
+/not-found:
+  GET:
+    status: 404
