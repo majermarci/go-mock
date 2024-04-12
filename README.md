@@ -35,7 +35,42 @@ Example:
             Content-Type: application/json; charset=utf-8
 ```
 
-## Running the server locally
+## Running the mock server
+
+You can run the application in the following ways:
+
+- [Docker Container](#docker-container)
+- [Helm Chart](#helm-chart)
+- [Locally with Go](#locally-with-go)
+
+### Docker Container
+
+```bash
+docker run -p 8080:8080 -v config.yaml:/app/config.yaml ghcr.io/majermarci/go-mock:latest
+```
+
+Optionally you can use Docker Compose as well
+
+```yaml
+version: '3'
+
+services:
+
+  go-mock:
+    image: ghcr.io/majermarci/go-mock:latest
+    container_name: go-mock
+    volumes:
+      - config.yaml:/app/config.yaml
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+```
+
+### Helm Chart
+
+WIP
+
+### Locally with Go
 
 You must have Go installed at least on version 1.22.2!
 
