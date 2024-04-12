@@ -42,6 +42,6 @@
       Key-1: Value-1
     status: 201
 
-/not-found:
+/unauthorized:
   GET:
-    status: 404
+    status: 401

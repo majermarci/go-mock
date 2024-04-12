@@ -8,14 +8,14 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-type endpoint struct {
+type method struct {
 	Headers map[string]string `yaml:"headers"`
 	Body    string            `yaml:"body"`
 	Status  int               `yaml:"status"`
 }
 
 type config struct {
-	Endpoints map[string]map[string]endpoint `yaml:",inline"`
+	Endpoints map[string]map[string]method `yaml:",inline"`
 }
 
 func loadConfig(file string) (conf config, err error) {
