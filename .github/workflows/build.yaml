@@ -1,0 +1,51 @@
+name: Build
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    # needs: audit
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - platform: linux
+            arch: amd64
+          - platform: linux
+            arch: arm64
+          # - platform: darwin
+          #   arch: arm64
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: 1.22.2
+
+    - name: Extract binary name and version
+      run: |
+        echo "BINARY_NAME=$(basename $(pwd))" >> $GITHUB_ENV
+        echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+    - name: Build for ${{ matrix.platform }} ${{ matrix.arch }}
+      run: GOOS=${{ matrix.platform }} GOARCH=${{ matrix.arch }} go build -trimpath -a -ldflags "-s -w" -installsuffix cgo -o bin/${{ env.BINARY_NAME }}-${{ matrix.platform }}-${{ matrix.arch }} ./server
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: binaries
+        path: bin/
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1.1.3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./bin/${{ env.BINARY_NAME }}-${{ matrix.platform }}-${{ matrix.arch }}
+        asset_name: ${{ env.BINARY_NAME }}-${{ matrix.platform }}-${{ matrix.arch }}
+        asset_content_type: application/octet-stream
