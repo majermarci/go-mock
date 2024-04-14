@@ -43,6 +43,8 @@ You can run the application in the following ways:
 - [Helm Chart](#helm-chart)
 - [Locally with Go](#locally-with-go)
 
+---
+
 ### Docker Container
 
 ```bash
@@ -66,23 +68,29 @@ services:
     restart: unless-stopped
 ```
 
+---
+
 ### Helm Chart
 
 WIP
 
+---
+
 ### Locally with Go
 
-You must have Go installed at least on version 1.22.2!
-
-1. Clone the repository
+You must have Go installed at least on version 1.22.2! Then either run the install command:
 
 ```bash
-git clone https://github.com/majermarci/go-mock.git
-cd go-mock
+go install github.com/majermarci/go-mock/server
 ```
 
-2. Start the server
+Or run the server directly:
 
 ```bash
+# 1. Clone the repository
+git clone https://github.com/majermarci/go-mock.git
+cd go-mock
+
+# 2. Start the server
 go run ./server
 ```
