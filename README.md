@@ -47,8 +47,10 @@ You can run the application in the following ways:
 
 ### Docker Container
 
+For a quick start you can run the server in a Docker container. You must provide a [config file](https://github.com/majermarci/go-mock/blob/main/config.yaml) to the container, and you can do so by mounting it to the `/app/config.yaml` path. Otherwise the server will start with the default config from the repository.
+
 ```bash
-docker run -p 8080:8080 -v config.yaml:/app/config.yaml ghcr.io/majermarci/go-mock:latest
+docker run -p 8080:8080 -v ./config.yaml:/app/config.yaml ghcr.io/majermarci/go-mock:latest
 ```
 
 Optionally you can use Docker Compose as well
@@ -62,7 +64,7 @@ services:
     image: ghcr.io/majermarci/go-mock:latest
     container_name: go-mock
     volumes:
-      - config.yaml:/app/config.yaml
+      - ./config.yaml:/app/config.yaml
     ports:
       - 8080:8080
     restart: unless-stopped
@@ -72,7 +74,7 @@ services:
 
 ### Helm Chart
 
-WIP
+Work in progress...
 
 ---
 
@@ -94,3 +96,17 @@ cd go-mock
 # 2. Start the server
 go run ./server
 ```
+
+---
+
+## Binary Installation
+
+You can also download the binary from the [releases page](github.com/majermarci/go-mock/releases) and run it directly.
+
+Another option is to use the following script to download and install the binary to your `/usr/local/bin` directory:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/majermarci/go-mock/main/install.sh | sudo bash
+```
+
+After installing you can run it in any directory that has a valid config file.
