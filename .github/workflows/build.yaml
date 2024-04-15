@@ -1,4 +1,4 @@
-name: Build
+name: Go Build Binary
 
 on:
   release:

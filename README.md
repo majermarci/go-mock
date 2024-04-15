@@ -2,10 +2,16 @@
 
 Simple server to mock responses for any given path and request.
 
-## Config file structure
+## Configuration Options
+
+### Server Configuration file
 
 The configuration is a yaml file containing paths, and each path can have one of each http method defined with a response.
 The response on methods must be uppercase and contain a response status. Additionally they can have a body and any number of headers.
+
+> [!WARNING]
+> By default the config file's name must be `config.yaml` and must be in the current working directory when the server is started.
+> If you want to use a different file, you can provide it with the `-c` flag followed by the path to the file.
 
 Format is the following:
 
@@ -35,6 +41,15 @@ Example:
             Content-Type: application/json; charset=utf-8
 ```
 
+---
+
+### Using a different port
+
+By default the server listens on port 8080, but you can change it by setting the `-p` flag folowed by a port number.
+Simply run the server with `go-mock -p <port-number>` to change it.
+
+For Docker the easiest way is to use the `-p` flag or the ports section in compose file, so you can map it to a different one.
+
 ## Running the mock server
 
 You can run the application in the following ways:
@@ -53,7 +68,7 @@ For a quick start you can run the server in a Docker container. You must provide
 docker run -p 8080:8080 -v ./config.yaml:/app/config.yaml ghcr.io/majermarci/go-mock:latest
 ```
 
-Optionally you can use Docker Compose as well
+Optionally you can use Docker Compose as well:
 
 ```yaml
 version: '3'

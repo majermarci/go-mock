@@ -1,9 +1,13 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"net/http"
+	"strconv"
 )
+
+var port = flag.String("p", "8080", "Port where the server will listen (default: 8080)")
 
 func serve(c config) {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -29,6 +33,11 @@ func serve(c config) {
 		}
 	})
 
-	log.Println("Starting server on :8080...")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	_, err := strconv.Atoi(*port)
+	if err != nil {
+		log.Fatalf("Invalid port: %v", err)
+	}
+
+	log.Printf("Starting server on :%s...", *port)
+	log.Fatal(http.ListenAndServe(":"+*port, nil))
 }
