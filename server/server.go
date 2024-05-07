@@ -2,8 +2,9 @@ package main
 
 import (
 	"flag"
-	"log"
+	"log/slog"
 	"net/http"
+	"os"
 	"strconv"
 )
 
@@ -21,23 +22,28 @@ func serve(c config) {
 				w.Header().Set(key, value)
 			}
 
-			log.Printf("Request mocked: %s %s\n", method, path)
+			slog.Info("Request mocked", "method", method, "path", path)
 
 			w.WriteHeader(endpoint.Status)
 			if endpoint.Body != "" {
 				w.Write([]byte(endpoint.Body))
 			}
 		} else {
-			log.Printf("Not found: %s %s\n", method, path)
+			slog.Error("Not found", "method", method, "path", path)
 			http.NotFound(w, r)
 		}
 	})
 
 	_, err := strconv.Atoi(*port)
 	if err != nil {
-		log.Fatalf("Invalid port: %v", err)
+		slog.Error("Invalid port:"+*port, "details", err)
+		os.Exit(1)
 	}
 
-	log.Printf("Starting server on :%s...", *port)
-	log.Fatal(http.ListenAndServe(":"+*port, nil))
+	slog.Info("Starting server on port " + *port)
+	err = http.ListenAndServe(":"+*port, nil)
+	if err != nil {
+		slog.Error("Error with server", "details", err)
+		os.Exit(1)
+	}
 }

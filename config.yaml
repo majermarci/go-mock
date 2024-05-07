@@ -42,6 +42,19 @@
       Key-1: Value-1
     status: 201
 
+/xml:
+  POST:
+    headers:
+      Key-1: Value-1
+    status: 202
+    body: |
+      <note>
+        <to>X</to>
+        <from>Y</from>
+        <heading>Reminder</heading>
+        <body>Don't give up!</body>
+      </note>
+
 /unauthorized:
   GET:
     status: 401
