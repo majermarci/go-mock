@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log/slog"
 	"os"
 	"regexp"
 
@@ -36,10 +37,18 @@ func loadConfig(file string) (conf config, err error) {
 	headerKeyRegexp := regexp.MustCompile(`^[a-zA-Z0-9-]+$`)
 	headerValueRegexp := regexp.MustCompile(`^[a-zA-Z0-9/;=.\s-]+$`)
 
+	reservedPaths := map[string]bool{
+		"/healthz": true,
+	}
+
 	// Validate the path, methods, headers and status codes
 	for path, methods := range conf.Endpoints {
 		if !pathRegexp.MatchString(path) {
 			return conf, fmt.Errorf("invalid path: %s", path)
+		}
+
+		if reservedPaths[path] {
+			slog.Warn(fmt.Sprintf("Path %q in the configuration conflicts with a reserved path", path))
 		}
 
 		for method, endpoint := range methods {

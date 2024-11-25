@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "go-mock.fullname" . }}
+  labels:
+    {{- include "go-mock.labels" . | nindent 4 }}
+data:
+  config.json: |-
+{{ .Values.mockConfig | nindent 4 }}

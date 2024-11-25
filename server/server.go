@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"log/slog"
 	"net/http"
@@ -9,9 +10,28 @@ import (
 	"strings"
 )
 
-var port = flag.String("p", "8080", "Port where the server will listen (default: 8080)")
+var (
+	port    = flag.String("p", "8080", "Port where the server will listen (default: 8080)")
+	version = "0.4.0"
+)
 
 func serve(c config) {
+	// Reserved health probe endpoint without logging
+	http.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
+		response := map[string]string{
+			"status":  "running",
+			"version": version,
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		err := json.NewEncoder(w).Encode(response)
+		if err != nil {
+			slog.Error("Error writing health response", "details", err)
+		}
+	})
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		path := r.URL.Path
 		method := r.Method
