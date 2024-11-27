@@ -29,7 +29,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  targetPort: 8080
+  containerPort: 8080
   port: 80
 
 ingress:
@@ -61,11 +61,11 @@ resources:
 livenessProbe:
   httpGet:
     path: /healthz
-    port: http
+    port: 8080
 readinessProbe:
   httpGet:
     path: /healthz
-    port: http
+    port: 8080
 
 # Additional volumes on the output Deployment definition.
 volumes: []
@@ -77,8 +77,8 @@ volumes: []
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:
   - name: mockconfig-configmap
-    mountPath: /entrypoint.sh
-    subPath: entrypoint.sh
+    mountPath: /app/config.yaml
+    subPath: config.yaml
     readOnly: true
 
 

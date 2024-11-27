@@ -5,5 +5,5 @@ metadata:
   labels:
     {{- include "go-mock.labels" . | nindent 4 }}
 data:
-  config.json: |-
+  config.yaml: |-
 {{ .Values.mockConfig | nindent 4 }}

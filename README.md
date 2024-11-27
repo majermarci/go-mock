@@ -89,7 +89,19 @@ services:
 
 ### Helm Chart
 
-Work in progress...
+With Helm you can customize the config in your own [values file](https://github.com/majermarci/go-mock/blob/main/helm/go-mock/values.yaml) using the `mockConfig` field.
+To install the `go-mock` Helm chart from this repository, run the following commands:
+
+```bash
+# Add the GitHub repository as a Helm chart repository
+helm repo add go-mock https://majermarci.github.io/go-mock/helm
+
+# Update your local Helm chart repositories
+helm repo update
+
+# Install the chart
+helm upgrade -i my-go-mock go-mock/go-mock -n go-mock --create-namespace
+```
 
 ---
 
