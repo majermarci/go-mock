@@ -1,11 +1,13 @@
 name: Publish Helm Chart
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'charts/**'
+  release:
+    types: [created]
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'charts/**'
 
 permissions: {}
 
@@ -38,6 +40,7 @@ jobs:
         uses: helm/chart-releaser-action@v1.6.0
         with:
           charts_dir: charts
+          mark_as_latest: false
           config: cr.yaml
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"

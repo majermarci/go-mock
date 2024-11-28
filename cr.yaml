@@ -1,4 +1,6 @@
 sign: false
 
 owner: majermarci
+git-repo: go-mock
 git-base-url: https://api.github.com/
+git-upload-url: https://uploads.github.com/
