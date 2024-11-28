@@ -1,4 +1,4 @@
-name: Audit and Test Go Code
+name: Audit
 
 on:
   push:
