@@ -3,6 +3,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/majermarci/go-mock)](https://goreportcard.com/report/github.com/majermarci/go-mock)
 [![Go Reference](https://pkg.go.dev/badge/github.com/majermarci/go-mock.svg)](https://pkg.go.dev/github.com/majermarci/go-mock)
 ![License](https://img.shields.io/github/license/majermarci/go-mock?label=License)
+[![Docker Status](https://github.com/majermarci/go-mock/actions/workflows/docker.yaml/badge.svg)](https://github.com/majermarci/go-mock/actions/workflows/docker.yaml)
 [![Build Status](https://github.com/majermarci/go-mock/actions/workflows/build.yaml/badge.svg)](https://github.com/majermarci/go-mock/actions/workflows/build.yaml)
 [![Test Status](https://github.com/majermarci/go-mock/actions/workflows/audit.yaml/badge.svg)](https://github.com/majermarci/go-mock/actions/workflows/audit.yaml)
 [![Latest Release)](https://img.shields.io/github/v/release/majermarci/go-mock?logo=github)](https://github.com/majermarci/go-mock/releases)
