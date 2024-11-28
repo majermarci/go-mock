@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  go-mock:
+  - apiVersion: v2
+    appVersion: v0.4.0
+    created: "2024-11-28T11:15:46.346166809Z"
+    description: Simple Go-Mock Application
+    digest: 20dd619bf6823d89c7374842720c5cbc0f7d6eee53dc233048fcd90062d4bb9b
+    name: go-mock
+    type: application
+    urls:
+    - https://github.com/majermarci/go-mock/releases/download/go-mock-0.1.2/go-mock-0.1.2.tgz
+    version: 0.1.2
+generated: "2024-11-28T11:15:46.346176678Z"
