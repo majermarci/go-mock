@@ -94,7 +94,7 @@ To install the `go-mock` Helm chart from this repository, run the following comm
 
 ```bash
 # Add the GitHub repository as a Helm chart repository
-helm repo add go-mock https://majermarci.github.io/go-mock/helm
+helm repo add go-mock https://majermarci.github.io/go-mock
 
 # Update your local Helm chart repositories
 helm repo update
