@@ -14,11 +14,10 @@ Simple server to mock responses for any given path and request.
 
 ### Server Configuration file
 
-The configuration is a yaml file containing paths, and each path can have one of each http method defined with a response.
-The response on methods must be uppercase and contain a response status. Additionally they can have a body and any number of headers.
+The configuration is a YAML file that defines paths, with each path supporting one or more HTTP methods, each of which specifies a response. Responses must include a status code and may optionally include a body and headers.
 
 > [!WARNING]
-> By default the config file's name must be `config.yaml` and must be in the current working directory when the server is started.
+> By default the configuration file's name must be `config.yaml` and must be in the current working directory when the server is started.
 > If you want to use a different file, you can provide it with the `-c` flag followed by the path to the file.
 
 Format is the following:
@@ -70,13 +69,9 @@ You can run the application in the following ways:
 
 ### Docker Container
 
-For a quick start you can run the server in a Docker container. You must provide a [config file](https://github.com/majermarci/go-mock/blob/main/config.yaml) to the container, and you can do so by mounting it to the `/app/config.yaml` path. Otherwise the server will start with the default config from the repository.
+To quickly start the server using Docker, provide a [configuration file](https://github.com/majermarci/go-mock/blob/main/config.yaml) to the container by mounting it to `/app/config.yaml`. If no configuration file is provided, the server will use the default one from the repository.
 
-```bash
-docker run -p 8080:8080 -v ./config.yaml:/app/config.yaml ghcr.io/majermarci/go-mock:latest
-```
-
-Optionally you can use Docker Compose as well:
+#### Using Docker Compose
 
 ```yaml
 version: '3'
@@ -91,6 +86,12 @@ services:
     ports:
       - 8080:8080
     restart: unless-stopped
+```
+
+#### Using Docker CLI
+
+```bash
+docker run -p 8080:8080 -v ./config.yaml:/app/config.yaml ghcr.io/majermarci/go-mock:latest
 ```
 
 ---
@@ -115,18 +116,17 @@ helm upgrade -i my-go-mock go-mock/go-mock -n go-mock --create-namespace
 
 ### Locally with Go
 
-You must have Go installed at least on version 1.22.2! Then either run the install command:
+You must have Go installed at least on version `1.22.2`! Then either run the install command:
 
 ```bash
 go install github.com/majermarci/go-mock/server
 ```
 
-Or run the server directly:
+Or run the server directly from the code:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/majermarci/go-mock.git
-cd go-mock
+git clone https://github.com/majermarci/go-mock.git && cd go-mock
 
 # 2. Start the server
 go run ./server
@@ -141,7 +141,7 @@ You can also download the binary from the [releases page](github.com/majermarci/
 Another option is to use the following script to download and install the binary to your `/usr/local/bin` directory:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/majermarci/go-mock/main/install.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/majermarci/go-mock/main/install.sh | bash
 ```
 
 After installing you can run it in any directory that has a valid config file.
