@@ -1,5 +1,4 @@
-// Package mock adds functions that load the config and run the server.
-package mock
+package main
 
 import (
 	"encoding/json"
@@ -16,7 +15,8 @@ var (
 	version = "0.5.1"
 )
 
-func Serve(c config) {
+// Serve is called with loaded config by main func
+func serve(c config) {
 	// Reserved health probe endpoint without logging
 	http.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
 		response := map[string]string{
