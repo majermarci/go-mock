@@ -1,3 +1,5 @@
+// Package mock adds functions that load the config and run the server.
+
 package mock
 
 import (
