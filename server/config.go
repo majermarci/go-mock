@@ -39,6 +39,7 @@ func loadConfig(file string) (conf config, err error) {
 
 	reservedPaths := map[string]bool{
 		"/healthz": true,
+		"/paths":   true,
 	}
 
 	// Validate the path, methods, headers and status codes

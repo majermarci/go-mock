@@ -86,6 +86,8 @@ nodeSelector: {}
 tolerations: []
 affinity: {}
 
+adminPass: admin
+
 mockConfig: |-
   /kube:
     GET:

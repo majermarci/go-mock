@@ -48,6 +48,13 @@ Example:
             Content-Type: application/json; charset=utf-8
 ```
 
+### Pre-defined paths
+
+There are curretnly two paths that are reserved:
+
+- `/healthz`: Shows if the server is up and it's version. Requests are not logged here due to liveness probe checks.
+- `/paths`: A list of all available endpoints and the methods that can be used on them. Requires admin credentials which are `admin:admin` by default. It can be changed by setting the `MOCK_ADMIN_PASS` environment variable.
+
 ---
 
 ### Using a different port

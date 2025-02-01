@@ -32,6 +32,41 @@ func serve(c config) {
 		}
 	})
 
+	http.HandleFunc("/paths", func(w http.ResponseWriter, r *http.Request) {
+
+		adminPassword := "admin"
+		if envPass := os.Getenv("MOCK_ADMIN_PASS"); envPass != "" {
+			adminPassword = envPass
+		}
+
+		username, password, ok := r.BasicAuth()
+		if !ok || username != "admin" || password != adminPassword {
+			w.Header().Set("WWW-Authenticate", `Basic realm="restricted"`)
+			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+			slog.Warn("Wrong credentials used on /paths endpoint.")
+			return
+		}
+
+		pathsResponse := map[string][]string{}
+
+		for path, methods := range c.Endpoints {
+			for method := range methods {
+				pathsResponse[path] = append(pathsResponse[path], method)
+			}
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		err := json.NewEncoder(w).Encode(pathsResponse)
+		if err != nil {
+			slog.Error("Error writing paths response", "details", err)
+		}
+
+		slog.Info("Paths endpoint requested")
+	})
+
+	// Default handler for all other routes
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		path := r.URL.Path
 		method := r.Method
