@@ -5,7 +5,7 @@ COPY . .
 
 RUN go mod download
 RUN go test -v -vet=off -buildvcs=false ./...
-RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -a -ldflags "-s -w" -installsuffix cgo -o go-mock ./server
+RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -a -ldflags "-s -w" -installsuffix cgo -o go-mock .
 
 
 

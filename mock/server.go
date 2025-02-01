@@ -1,4 +1,4 @@
-package main
+package mock
 
 import (
 	"encoding/json"
@@ -12,10 +12,10 @@ import (
 
 var (
 	port    = flag.String("p", "8080", "Port where the server will listen (default: 8080)")
-	version = "0.4.0"
+	version = "0.5.1"
 )
 
-func serve(c config) {
+func Serve(c config) {
 	// Reserved health probe endpoint without logging
 	http.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
 		response := map[string]string{

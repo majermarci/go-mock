@@ -1,4 +1,4 @@
-package main
+package mock
 
 import (
 	"fmt"
@@ -19,7 +19,7 @@ type config struct {
 	Endpoints map[string]map[string]method `yaml:",inline"`
 }
 
-func loadConfig(file string) (conf config, err error) {
+func LoadConfig(file string) (conf config, err error) {
 	data, err := os.ReadFile(file)
 	if err != nil {
 		return conf, err

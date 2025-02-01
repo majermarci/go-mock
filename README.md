@@ -126,7 +126,7 @@ helm upgrade -i my-go-mock go-mock/go-mock -n go-mock --create-namespace
 You must have Go installed at least on version `1.22.2`! Then either run the install command:
 
 ```bash
-go install github.com/majermarci/go-mock/server
+go install github.com/majermarci/go-mock@latest
 ```
 
 Or run the server directly from the code:
@@ -136,7 +136,7 @@ Or run the server directly from the code:
 git clone https://github.com/majermarci/go-mock.git && cd go-mock
 
 # 2. Start the server
-go run ./server
+go run .
 ```
 
 ---
