@@ -12,7 +12,7 @@ import (
 
 var (
 	port    = flag.String("p", "8080", "Port where the server will listen (default: 8080)")
-	version = "0.5.2"
+	version = "0.5.4"
 )
 
 // Serve is called with loaded config by main func
