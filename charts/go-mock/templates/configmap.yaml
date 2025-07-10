@@ -6,4 +6,4 @@ metadata:
     {{- include "go-mock.labels" . | nindent 4 }}
 data:
   config.yaml: |-
-{{ .Values.mockConfig | nindent 4 }}
+{{ .Values.mockConfig | toYaml | nindent 4 }}

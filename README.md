@@ -116,7 +116,7 @@ helm repo add go-mock https://majermarci.github.io/go-mock
 helm repo update
 
 # Install the chart
-helm upgrade -i my-go-mock go-mock/go-mock -n go-mock --create-namespace
+helm upgrade --install mock-api go-mock/go-mock --namespace go-mock --create-namespace
 ```
 
 ---
