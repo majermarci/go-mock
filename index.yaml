@@ -3,6 +3,16 @@ entries:
   go-mock:
   - apiVersion: v2
     appVersion: v0.5.4
+    created: "2025-07-10T11:01:56.203389872Z"
+    description: Helm Chart for the Go-Mock Application
+    digest: 055dd513cf249cfdb8a42cf4d7fe25810068e9f3099bc8990469f44cb8538377
+    name: go-mock
+    type: application
+    urls:
+    - https://github.com/majermarci/go-mock/releases/download/go-mock-0.2.1/go-mock-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
+    appVersion: v0.5.4
     created: "2025-07-10T10:47:29.31204152Z"
     description: Helm Chart for the Go-Mock Application
     digest: 5e98c8614b492a61351b21432d5845f67d4b15c418cae8e392d5a9972f1cb8c2
@@ -71,4 +81,4 @@ entries:
     urls:
     - https://github.com/majermarci/go-mock/releases/download/go-mock-0.1.2/go-mock-0.1.2.tgz
     version: 0.1.2
-generated: "2025-07-10T10:47:29.312068169Z"
+generated: "2025-07-10T11:01:56.203420759Z"
