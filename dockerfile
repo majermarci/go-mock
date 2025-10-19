@@ -1,4 +1,4 @@
-FROM golang:1.25.2-alpine3.18 AS build
+FROM golang:1.25.2-alpine3.22 AS build
 
 WORKDIR /src
 COPY . .
@@ -9,7 +9,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -a -ldflags "-s -w" -installsuff
 
 
 
-FROM alpine:3.18
+FROM alpine:3.22
 
 LABEL org.opencontainers.image.source=https://github.com/majermarci/go-mock
 LABEL org.opencontainers.image.description="Go Mock Server"
