@@ -123,7 +123,7 @@ helm upgrade --install mock-api go-mock/go-mock --namespace go-mock --create-nam
 
 ### Locally with Go
 
-You must have Go installed at least on version `1.22.2`! Then either run the install command:
+You must have Go installed at least on version `1.25.2`! Then either run the install command:
 
 ```bash
 go install github.com/majermarci/go-mock/go-mock@latest
