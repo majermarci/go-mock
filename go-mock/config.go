@@ -50,7 +50,7 @@ func loadConfig(file string) (conf config, err error) {
 		}
 
 		if reservedPaths[path] {
-			slog.Warn(fmt.Sprintf("Path %q in the configuration conflicts with a reserved path", path))
+			slog.Warn(fmt.Sprintf("path %q in the configuration conflicts with a reserved path", path))
 		}
 
 		for method, endpoint := range methods {

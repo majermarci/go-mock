@@ -12,7 +12,7 @@ import (
 
 var (
 	port    = flag.String("p", "8080", "Port where the server will listen (default: 8080)")
-	version = "0.5.4"
+	version = "0.5.5"
 )
 
 // Serve is called with loaded config by main func
@@ -29,7 +29,7 @@ func serve(c config) {
 
 		err := json.NewEncoder(w).Encode(response)
 		if err != nil {
-			slog.Error("Error writing health response", "details", err)
+			slog.Error("error writing health response", "details", err)
 		}
 	})
 
@@ -44,7 +44,7 @@ func serve(c config) {
 		if !ok || username != "admin" || password != adminPassword {
 			w.Header().Set("WWW-Authenticate", `Basic realm="restricted"`)
 			http.Error(w, "Unauthorized", http.StatusUnauthorized)
-			slog.Warn("Wrong credentials used on /paths endpoint.")
+			slog.Warn("wrong credentials used on /paths endpoint.")
 			return
 		}
 
@@ -52,7 +52,7 @@ func serve(c config) {
 
 		for path, methods := range c.Endpoints {
 			for method := range methods {
-				pathsResponse[path] = append(pathsResponse[path], method)
+				pathsResponse[method] = append(pathsResponse[method], path)
 			}
 		}
 
@@ -61,10 +61,10 @@ func serve(c config) {
 
 		err := json.NewEncoder(w).Encode(pathsResponse)
 		if err != nil {
-			slog.Error("Error writing paths response", "details", err)
+			slog.Error("error writing paths response", "details", err)
 		}
 
-		slog.Info("Paths endpoint requested")
+		slog.Info("paths endpoint requested")
 	})
 
 	// Default handler for all other routes
@@ -79,14 +79,19 @@ func serve(c config) {
 				w.Header().Set(key, value)
 			}
 
-			slog.Info("Request mocked", "method", method, "path", path)
+			slog.Info("request mocked",
+				"path", path,
+				"method", method,
+				"headers_received", r.Header,
+				"headers_sent", w.Header(),
+			)
 
 			body := strings.TrimSpace(endpoint.Body)
 			if isJSON(body) {
 				formattedBody, err := formatJSON(body)
 				if err != nil {
-					slog.Error("Invalid JSON in response body", "details", err)
-					http.Error(w, "Invalid JSON in server config", http.StatusInternalServerError)
+					slog.Error("invalid JSON in response body", "details", err)
+					http.Error(w, "invalid JSON in server config", http.StatusInternalServerError)
 					return
 				}
 				w.Header().Set("Content-Type", "application/json")
@@ -99,25 +104,25 @@ func serve(c config) {
 			if body != "" {
 				_, err := w.Write([]byte(body))
 				if err != nil {
-					slog.Error("Error writing response", "details", err)
+					slog.Error("error writing response", "details", err)
 				}
 			}
 		} else {
-			slog.Error("Not found", "method", method, "path", path)
+			slog.Error("not found", "method", method, "path", path)
 			http.NotFound(w, r)
 		}
 	})
 
 	_, err := strconv.Atoi(*port)
 	if err != nil {
-		slog.Error("Invalid port:"+*port, "details", err)
+		slog.Error("invalid port:"+*port, "details", err)
 		os.Exit(1)
 	}
 
 	slog.Info("Starting server on port " + *port)
 	err = http.ListenAndServe(":"+*port, nil)
 	if err != nil {
-		slog.Error("Error with server", "details", err)
+		slog.Error("error with server", "details", err)
 		os.Exit(1)
 	}
 }
