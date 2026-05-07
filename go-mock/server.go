@@ -73,7 +73,7 @@ func serve(c config) {
 		method := r.Method
 
 		if endpoint, ok := c.Endpoints[path][method]; ok {
-			w.Header().Set("System", "mock-server")
+			w.Header().Set("Server", "go-mock/"+version)
 
 			for key, value := range endpoint.Headers {
 				w.Header().Set(key, value)
